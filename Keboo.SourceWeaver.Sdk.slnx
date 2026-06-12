@@ -1,0 +1,23 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="NuGet.config" />
+    <File Path="NuGetPackageReadme.md" />
+  </Folder>
+  <Folder Name="/Solution Items/.github/">
+    <File Path=".github/dependabot.yml" />
+  </Folder>
+  <Folder Name="/Solution Items/.github/workflows/">
+    <File Path=".github/workflows/build-and-deploy.yml" />
+    <File Path=".github/workflows/pr-code-coverage-comment.yml" />
+  </Folder>
+  <Project Path="Keboo.SourceWeaver.Generators/Keboo.SourceWeaver.Generators.csproj" Id="966b1368-50f7-4718-9b8f-d965a3e78387" />
+  <Project Path="Keboo.SourceWeaver.Sdk.Tests/Keboo.SourceWeaver.Sdk.Tests.csproj" />
+  <Project Path="Keboo.SourceWeaver.Sdk/Keboo.SourceWeaver.Sdk.csproj" />
+  <Project Path="SampleApp.Generators/SampleApp.Generators.csproj" Id="6e8134d3-d0b7-4c9b-a644-2d57100fbb74" />
+  <Project Path="SampleApp/SampleApp.csproj" Id="a34f3a00-63db-43b9-9651-39d5e3afafde" />
+</Solution>
