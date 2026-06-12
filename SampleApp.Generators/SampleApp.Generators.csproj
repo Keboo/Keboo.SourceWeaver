@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <AdditionalFiles Include="*.scriban" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
+
+    <ProjectReference Include="..\Keboo.SourceWeaver.Generators\Keboo.SourceWeaver.Generators.csproj">
+      <OutputItemType>Analyzer</OutputItemType>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
     <ProjectReference Include="..\Keboo.SourceWeaver.Sdk\Keboo.SourceWeaver.Sdk.csproj" />
   </ItemGroup>
 

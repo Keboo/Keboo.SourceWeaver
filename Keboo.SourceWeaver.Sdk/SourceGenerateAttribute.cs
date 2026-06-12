@@ -5,6 +5,4 @@ public class GenerationResult
 
 }
 
-public class GenerationPropertyContext
-{
-}
+

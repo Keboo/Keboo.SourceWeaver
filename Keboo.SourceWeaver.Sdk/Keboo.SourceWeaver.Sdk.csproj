@@ -15,7 +15,7 @@
     Ensure the README is included in the NuGet package
     https://learn.microsoft.com/nuget/reference/msbuild-targets#packagereadmefile
     -->
-    <None Include="..\NuGetPackageReadme.md" Pack="true" PackagePath="\"/>
+    <None Include="..\NuGetPackageReadme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,5 +23,9 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Keboo.SourceWeaver.Generators\Keboo.SourceWeaver.Generators.csproj" />
   </ItemGroup>
 </Project>
