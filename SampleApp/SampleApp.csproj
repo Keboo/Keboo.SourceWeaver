@@ -11,6 +11,10 @@
     <ProjectReference Include="..\SampleApp.Generators\SampleApp.Generators.csproj">
       <OutputItemType>Analyzer</OutputItemType>
     </ProjectReference>
+    <ProjectReference Include="..\Keboo.SourceWeaver.Sdk\Keboo.SourceWeaver.Sdk.csproj">
+      <OutputItemType>Analyzer</OutputItemType>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>
