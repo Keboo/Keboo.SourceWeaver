@@ -13,18 +13,18 @@ internal partial class ViewModel : INotifyPropertyChanged
 }
 
 
-partial class ViewModel
-{
-    public partial string Name
-    {
-        get => field;
-        set
-        {
-            if (field != value)
-            {
-                field = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
-            }
-        }
-    }
-}
+//partial class ViewModel
+//{
+//    public partial string Name
+//    {
+//        get => field;
+//        set
+//        {
+//            if (field != value)
+//            {
+//                field = value;
+//                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
+//            }
+//        }
+//    }
+//}

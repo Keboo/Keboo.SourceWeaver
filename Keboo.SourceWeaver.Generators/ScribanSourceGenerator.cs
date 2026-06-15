@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -23,7 +21,6 @@ public class ScribanSourceGenerator : IIncrementalGenerator
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        // Check if Microsoft.Extensions.Diagnostics.Testing is referenced
         IncrementalValuesProvider<AdditionalText> scribanFiles = context.AdditionalTextsProvider.Where(
             static file => file.Path.EndsWith(".scriban"));
 
@@ -32,7 +29,6 @@ public class ScribanSourceGenerator : IIncrementalGenerator
         IncrementalValuesProvider<ScribanFile> templates = scribanFiles
             .Select(static (additionalText, token) => GetScribanTemplates(additionalText, token));
 
-        // Only generate source if enabled and Microsoft.Extensions.Diagnostics.Testing is referenced
         context.RegisterSourceOutput(templates, static (context, scribanFile) =>
         {
             if (!string.IsNullOrEmpty(scribanFile.Content))
@@ -40,7 +36,6 @@ public class ScribanSourceGenerator : IIncrementalGenerator
                 context.AddSource($"{scribanFile.Name}.g.cs", BuildScribanSourceGenerator(scribanFile));
             }
         });
-
     }
 
     private static ScribanFile GetScribanTemplates(AdditionalText additionalText, CancellationToken cancellationToken)
