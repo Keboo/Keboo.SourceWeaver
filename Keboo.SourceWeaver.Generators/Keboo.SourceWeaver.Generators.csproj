@@ -13,6 +13,5 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
-    <PackageReference Include="Scriban" />
   </ItemGroup>
 </Project>

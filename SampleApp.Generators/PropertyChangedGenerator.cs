@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis;
 namespace SampleApp.Generators;
 
 [Generator(LanguageNames.CSharp)]
-public partial class PropertyChangedGenerator : PropertyAttributeGenerator<PropertyChangedAttribute>
+public class PropertyChangedGenerator : PropertyAttributeGenerator<PropertyChangedAttribute>
 {
     public override GenerationResult GenerateProperty(GenerationPropertyContext context)
     {
