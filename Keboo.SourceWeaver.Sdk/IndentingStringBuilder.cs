@@ -9,6 +9,8 @@ public sealed class IndentingStringBuilder
 
     public int IndentSize { get; set; } = DefaultIndentSize;
 
+    public int IndentCount => _indentCount;
+
     private readonly StringBuilder _builder = new();
     private int _indentCount;
 
