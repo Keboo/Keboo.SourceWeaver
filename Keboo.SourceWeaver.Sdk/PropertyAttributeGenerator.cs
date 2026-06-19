@@ -10,7 +10,7 @@ public abstract class PropertyAttributeGenerator<TAttribute> : IIncrementalGener
 {
     protected string GetAttributeFullName() => typeof(TAttribute).FullName!;
 
-    public abstract GenerationResult GenerateProperty(GenerationPropertyContext context);
+    public abstract GenerationResult Generate(GenerationPropertyContext context);
 
     private static readonly Regex LineSplitRegex = new("\r?\n");
 
@@ -42,12 +42,17 @@ public abstract class PropertyAttributeGenerator<TAttribute> : IIncrementalGener
 
         context.RegisterSourceOutput(propertyInfos, (spc, propertyContext) =>
         {
-            GenerateProperty(propertyContext!);
+            Generate(propertyContext!);
 
-            if (propertyContext!.Members.Count == 0)
+            if (propertyContext!.ClassMembers.Count == 0)
                 return;
 
             IndentingStringBuilder sb = new();
+
+            foreach (var usingStatement in propertyContext.UsingStatements)
+            {
+                sb.AppendLine(usingStatement);
+            }
 
             if (propertyContext.Namespace is not null)
             {
@@ -61,7 +66,7 @@ public abstract class PropertyAttributeGenerator<TAttribute> : IIncrementalGener
             sb.Indent();
 
 
-            foreach (var member in propertyContext.Members)
+            foreach (var member in propertyContext.ClassMembers)
             {
                 foreach (var memberLine in LineSplitRegex.Split(member))
                 {
@@ -78,25 +83,7 @@ public abstract class PropertyAttributeGenerator<TAttribute> : IIncrementalGener
                 sb.AppendLine("}");
             }
 
-            spc.AddSource($"{propertyContext.ClassName}_{propertyContext.PropertyName}.g.cs", sb.ToString());
+            spc.AddSource($"{propertyContext.ClassName}_{propertyContext.PropertyName}_{typeof(TAttribute).Name}.g.cs", sb.ToString());
         });
     }
-}
-
-public class GenerationClassContext
-{
-    public string? Namespace { get; init; }
-    public string ClassName { get; init; } = "";
-}
-
-public class GenerationPropertyContext : GenerationClassContext
-{
-    private readonly List<string> _members = new List<string>();
-
-    public string PropertyName { get; init; } = "";
-    public string PropertyType { get; init; } = "";
-
-    public void AddClassMember(string member) => _members.Add(member);
-
-    public IReadOnlyList<string> Members => _members;
 }

@@ -1,13 +1,10 @@
-﻿using System.ComponentModel;
-
-using SampleApp.Generators;
+﻿using SampleApp.Generators;
 
 namespace SampleApp;
 
-internal partial class ViewModel : INotifyPropertyChanged
+[NotifyPropertyChanged]
+internal partial class ViewModel
 {
-    public event PropertyChangedEventHandler? PropertyChanged;
-
     [PropertyChanged]
     public partial string Name { get; set; } = "";
 }

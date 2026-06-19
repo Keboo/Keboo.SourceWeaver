@@ -7,7 +7,7 @@ namespace SampleApp.Generators;
 [Generator(LanguageNames.CSharp)]
 public class PropertyChangedGenerator : PropertyAttributeGenerator<PropertyChangedAttribute>
 {
-    public override GenerationResult GenerateProperty(GenerationPropertyContext context)
+    public override GenerationResult Generate(GenerationPropertyContext context)
     {
         context.AddClassMember($$"""
             public partial {{context.PropertyType}} {{context.PropertyName}}
