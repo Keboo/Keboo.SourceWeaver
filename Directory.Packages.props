@@ -27,7 +27,7 @@
     <PackageVersion Include="Moq.AutoMock" Version="4.0.2" />
     <PackageVersion Include="Scriban" Version="7.2.4" />
     <PackageVersion Include="TUnit" Version="1.53.0" />
-    <PackageVersion Include="TUnit.Assertions" Version="1.53.0" />
+    <PackageVersion Include="TUnit.Assertions" Version="1.56.18" />
     <PackageVersion Include="TUnit.Engine" Version="1.53.0" />
   </ItemGroup>
 </Project>
