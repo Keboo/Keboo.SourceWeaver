@@ -9,7 +9,9 @@ public class PropertyChangedGenerator : PropertyAttributeGenerator<PropertyChang
 {
     public override GenerationResult Generate(GenerationPropertyContext context)
     {
-        context.AddClassMember($$"""
+        var output = context.FromCurrent();
+
+        output.AddClassMember($$"""
             public partial {{context.PropertyType}} {{context.PropertyName}}
             {
                 get => field;

@@ -9,14 +9,20 @@ public class NotifyPropertyChangedGenerator : ClassAttributeGenerator<NotifyProp
 {
     public override GenerationResult Generate(GenerationClassContext context)
     {
-        context.AddUsing("using System.ComponentModel;");
+        if (context.ClassName.EndsWith("Foo"))
+        {
+            return GenerationResult.Skip;
+        }
 
-        context.AddNamespaceMember($$"""
+        GenerationOutput output = context.FromCurrent();
+        output.AddUsing("using System.ComponentModel;");
+        output.AddNamespaceMember($$"""
             partial class {{context.ClassName}} : INotifyPropertyChanged
             {
                 public event PropertyChangedEventHandler? PropertyChanged;
             }
             """);
+
         return GenerationResult.Success;
     }
 }

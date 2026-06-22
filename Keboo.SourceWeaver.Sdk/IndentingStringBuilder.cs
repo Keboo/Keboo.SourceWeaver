@@ -1,10 +1,13 @@
 ﻿using System.Globalization;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Keboo.SourceWeaver.Sdk;
 
 public sealed class IndentingStringBuilder
 {
+    private static readonly Regex LineSplitRegex = new("\r?\n");
+
     private const int DefaultIndentSize = 4;
 
     public int IndentSize { get; set; } = DefaultIndentSize;
@@ -35,6 +38,15 @@ public sealed class IndentingStringBuilder
     {
         AppendIndent();
         _builder.AppendLine(value);
+    }
+
+    public void AppendLines(string lines)
+    {
+        var lineArray = LineSplitRegex.Split(lines);
+        foreach (var line in lineArray)
+        {
+            AppendLine(line);
+        }
     }
 
     public override string ToString()
