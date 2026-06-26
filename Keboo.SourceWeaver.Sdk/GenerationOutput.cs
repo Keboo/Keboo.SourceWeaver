@@ -13,6 +13,8 @@ public class GenerationOutput
     private readonly List<string> _classMembers = [];
     public void AddClassMember(string member) => _classMembers.Add(member);
 
+    public void AddClassMember(WhitespaceInterpolatedStringHandler member) => _classMembers.Add(member.ToString());
+
     internal void WriteOutput(IndentingStringBuilder sb)
     {
         if (_classMembers.Count == 0 && NamespaceMembers.Count == 0)

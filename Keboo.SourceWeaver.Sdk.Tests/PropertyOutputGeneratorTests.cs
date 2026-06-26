@@ -1,25 +1,21 @@
 ﻿namespace Keboo.SourceWeaver.Sdk.Tests;
 
-using System.Text;
-
-using Microsoft.CodeAnalysis.Testing;
-using Microsoft.CodeAnalysis.Text;
-
-using VerifyCS = CSharpSourceGeneratorVerifier<PropertyOutputGeneratorTests.TestGenerator>;
+using static Keboo.SourceWeaver.Sdk.Tests.PropertyOutputGeneratorTests;
 
 
-public class PropertyOutputGeneratorTests : UnitTestBase
+public class PropertyOutputGeneratorTests : SourceGeneratorTestBase<PropertyTestGenerator>
 {
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public sealed class PropertyTestAttribute : Attribute;
 
-    internal class TestGenerator : PropertyAttributeGenerator<PropertyTestAttribute>
+    public class PropertyTestGenerator : PropertyAttributeGenerator<PropertyTestAttribute>
     {
         public override GenerationResult Generate(GenerationPropertyContext context)
         {
             var output = context.FromCurrent();
 
             output.AddClassMember($$"""
-            public partial {{context.PropertyType}} {{context.PropertyName}}
+            {{context.PropertyAccessModifier:+}}partial {{context.PropertyType}} {{context.PropertyName}}
             {
                 get => field;
                 set
@@ -39,9 +35,7 @@ public class PropertyOutputGeneratorTests : UnitTestBase
     [Test]
     public async Task WhenPropertyAttributeIsApplied_ItGeneratesPartialPropertyImplementation()
     {
-        await new VerifyCS.Test
-        {
-            TestCode = """
+        await TestGenerator("""
             using static Keboo.SourceWeaver.Sdk.Tests.PropertyOutputGeneratorTests;
 
             namespace Test;
@@ -52,39 +46,103 @@ public class PropertyOutputGeneratorTests : UnitTestBase
                 public partial int Number { get; set; }
             }
             """,
-
-            TestState =
+            """
+            namespace Test
             {
-                GeneratedSources =
+                partial class Foo
                 {
-                    GetSourceFile("""
-                    namespace Test
+                    public partial int Number
                     {
-                        partial class Foo
+                        get => field;
+                        set
                         {
-                            public partial int Number
+                            if (field != value)
                             {
-                                get => field;
-                                set
-                                {
-                                    if (field != value)
-                                    {
-                                        field = value;
-                                    }
-                                }
+                                field = value;
                             }
                         }
                     }
-
-                    """, "Foo_Number_PropertyTestAttribute.g.cs")
                 }
             }
-        }.RunAsync(CT);
+
+            """,
+            "Foo_Number_PropertyTestAttribute"
+            );
     }
 
-    private static (string FileName, SourceText SourceText) GetSourceFile(string content, string fileName)
+    [Test]
+    public async Task WhenPropertyIsPrivate_ItGeneratesPartialPropertyImplementation()
     {
-        fileName = Path.Combine("Keboo.SourceWeaver.Sdk.Tests", "Keboo.SourceWeaver.Sdk.Tests.PropertyOutputGeneratorTests+TestGenerator", fileName);
-        return (fileName, SourceText.From(content, Encoding.UTF8, SourceHashAlgorithm.Sha256));
+        await TestGenerator("""
+            using static Keboo.SourceWeaver.Sdk.Tests.PropertyOutputGeneratorTests;
+
+            namespace Test;
+
+            internal partial class Foo 
+            {
+                [PropertyTest]
+                private partial int Number { get; set; }
+            }
+            """,
+            """
+            namespace Test
+            {
+                partial class Foo
+                {
+                    private partial int Number
+                    {
+                        get => field;
+                        set
+                        {
+                            if (field != value)
+                            {
+                                field = value;
+                            }
+                        }
+                    }
+                }
+            }
+
+            """,
+            "Foo_Number_PropertyTestAttribute"
+            );
+    }
+
+    [Test]
+    public async Task WhenPropertyHasNoAccessModifier_ItGeneratesPartialPropertyImplementation()
+    {
+        await TestGenerator("""
+            using static Keboo.SourceWeaver.Sdk.Tests.PropertyOutputGeneratorTests;
+
+            namespace Test;
+
+            partial class Foo 
+            {
+                [PropertyTest]
+                partial int Number { get; set; }
+            }
+            """,
+            """
+            namespace Test
+            {
+                partial class Foo
+                {
+                    partial int Number
+                    {
+                        get => field;
+                        set
+                        {
+                            if (field != value)
+                            {
+                                field = value;
+                            }
+                        }
+                    }
+                }
+            }
+
+            """,
+            "Foo_Number_PropertyTestAttribute"
+            );
     }
 }
