@@ -1,8 +1,10 @@
-﻿namespace Keboo.SourceWeaver.Sdk;
+﻿using Keboo.SourceWeaver.Sdk.Output;
+
+namespace Keboo.SourceWeaver.Sdk.Types;
 
 public class GenerationContext
 {
-    public string? Namespace { get; init; }
+    public NamespaceDefinition? Namespace { get; init; }
 
     private readonly List<GenerationOutput> _generatedOutputs = [];
     internal IReadOnlyList<GenerationOutput> GeneratedOutputs => _generatedOutputs;
@@ -10,11 +12,11 @@ public class GenerationContext
     public void AddOutput(GenerationOutput output)
         => _generatedOutputs.Add(output);
 
-    public virtual GenerationOutput FromCurrent()
+    public virtual GenerationOutput CreateFromCurrent()
     {
         var rv = new GenerationOutput
         {
-            Namespace = Namespace
+            Namespace = Namespace?.Namespace
         };
         AddOutput(rv);
         return rv;
