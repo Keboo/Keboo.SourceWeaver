@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Using Include="Keboo.SourceWeaver.Sdk"/>
+  </ItemGroup>
+  
+  <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
 
     <ProjectReference Include="..\Keboo.SourceWeaver.Generators\Keboo.SourceWeaver.Generators.csproj">

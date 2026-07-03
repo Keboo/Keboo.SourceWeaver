@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Keboo.SourceWeaver.Sdk;
+namespace Keboo.SourceWeaver.Sdk.Output;
 
 [InterpolatedStringHandler]
 public readonly struct WhitespaceInterpolatedStringHandler
