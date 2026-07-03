@@ -1,4 +1,5 @@
-﻿using Keboo.SourceWeaver.Sdk;
+﻿using Keboo.SourceWeaver.Sdk.Generators;
+using Keboo.SourceWeaver.Sdk.Types;
 
 using Microsoft.CodeAnalysis;
 
@@ -9,7 +10,7 @@ public class PropertyChangedGenerator : PropertyAttributeGenerator<PropertyChang
 {
     public override GenerationResult Generate(GenerationPropertyContext context)
     {
-        var output = context.FromCurrent();
+        var output = context.CreateFromCurrent();
 
         output.AddClassMember($$"""
             public partial {{context.PropertyType}} {{context.PropertyName}}
