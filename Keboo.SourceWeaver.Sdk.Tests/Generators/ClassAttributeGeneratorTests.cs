@@ -1,6 +1,9 @@
-﻿namespace Keboo.SourceWeaver.Sdk.Tests;
+﻿namespace Keboo.SourceWeaver.Sdk.Tests.Generators;
 
-using static Keboo.SourceWeaver.Sdk.Tests.ClassAttributeGeneratorTests;
+using Keboo.SourceWeaver.Sdk.Generators;
+using Keboo.SourceWeaver.Sdk.Types;
+
+using static Keboo.SourceWeaver.Sdk.Tests.Generators.ClassAttributeGeneratorTests;
 
 
 public class ClassAttributeGeneratorTests : SourceGeneratorTestBase<ClassTestGenerator>
@@ -10,13 +13,13 @@ public class ClassAttributeGeneratorTests : SourceGeneratorTestBase<ClassTestGen
 
     public class ClassTestGenerator : ClassAttributeGenerator<ClassTestAttribute>
     {
-        public override GenerationResult Generate(GenerationClassContext context)
+        public override GenerationResult Generate(GenerationTypeContext context)
         {
-            var output = context.FromCurrent();
+            var output = context.CreateFromCurrent();
 
             output.AddUsing("using System.ComponentModel;");
             output.AddNamespaceMember($$"""
-            partial class {{context.ClassName}} : INotifyPropertyChanged
+            partial class {{context.Type.Name}} : INotifyPropertyChanged
             {
                 public event PropertyChangedEventHandler PropertyChanged;
             }

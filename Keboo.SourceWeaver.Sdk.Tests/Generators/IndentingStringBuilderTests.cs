@@ -1,4 +1,6 @@
-﻿namespace Keboo.SourceWeaver.Sdk.Tests;
+﻿using Keboo.SourceWeaver.Sdk.Output;
+
+namespace Keboo.SourceWeaver.Sdk.Tests.Generators;
 
 public class IndentingStringBuilderTests
 {

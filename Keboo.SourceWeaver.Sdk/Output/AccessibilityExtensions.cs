@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.CodeAnalysis;
 
-using Microsoft.CodeAnalysis;
-
-namespace Keboo.SourceWeaver.Sdk;
+namespace Keboo.SourceWeaver.Sdk.Output;
 
 public static class AccessibilityExtensions
 {

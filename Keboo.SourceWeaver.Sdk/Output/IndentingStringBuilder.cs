@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Keboo.SourceWeaver.Sdk;
+namespace Keboo.SourceWeaver.Sdk.Output;
 
 public sealed class IndentingStringBuilder
 {
