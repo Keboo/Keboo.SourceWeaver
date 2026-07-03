@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Testing;
 
-namespace Keboo.SourceWeaver.Sdk.Tests;
+namespace Keboo.SourceWeaver.Sdk.Tests.Generators;
 
 public static class CSharpSourceGeneratorVerifier<TSourceGenerator>
     where TSourceGenerator : IIncrementalGenerator, new()
