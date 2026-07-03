@@ -1,6 +1,9 @@
-﻿namespace Keboo.SourceWeaver.Sdk.Tests;
+﻿namespace Keboo.SourceWeaver.Sdk.Tests.Generators;
 
-using static Keboo.SourceWeaver.Sdk.Tests.PropertyOutputGeneratorTests;
+using Keboo.SourceWeaver.Sdk.Generators;
+using Keboo.SourceWeaver.Sdk.Types;
+
+using static Keboo.SourceWeaver.Sdk.Tests.Generators.PropertyOutputGeneratorTests;
 
 
 public class PropertyOutputGeneratorTests : SourceGeneratorTestBase<PropertyTestGenerator>
@@ -12,7 +15,7 @@ public class PropertyOutputGeneratorTests : SourceGeneratorTestBase<PropertyTest
     {
         public override GenerationResult Generate(GenerationPropertyContext context)
         {
-            var output = context.FromCurrent();
+            var output = context.CreateFromCurrent();
 
             output.AddClassMember($$"""
             {{context.PropertyAccessModifier:+}}partial {{context.PropertyType}} {{context.PropertyName}}

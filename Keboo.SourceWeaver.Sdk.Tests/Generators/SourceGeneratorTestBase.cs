@@ -3,7 +3,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Keboo.SourceWeaver.Sdk.Tests;
+namespace Keboo.SourceWeaver.Sdk.Tests.Generators;
 
 public abstract class SourceGeneratorTestBase<TGenerator> : UnitTestBase
     where TGenerator : IIncrementalGenerator, new()

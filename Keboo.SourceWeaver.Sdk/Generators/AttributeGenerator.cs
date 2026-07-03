@@ -1,8 +1,11 @@
 using System.Collections.Immutable;
 
+using Keboo.SourceWeaver.Sdk.Output;
+using Keboo.SourceWeaver.Sdk.Types;
+
 using Microsoft.CodeAnalysis;
 
-namespace Keboo.SourceWeaver.Sdk;
+namespace Keboo.SourceWeaver.Sdk.Generators;
 
 public abstract class AttributeGenerator<TAttribute, TContext> : IIncrementalGenerator
     where TAttribute : Attribute
@@ -53,6 +56,4 @@ public abstract class AttributeGenerator<TAttribute, TContext> : IIncrementalGen
         context.RegisterSourceOutput(outputResults,
             static (spc, outputResult) => spc.AddSource(outputResult!.OutputHintName, outputResult.GeneratedCode));
     }
-
-    private record class GenerationOutputResult(string OutputHintName, string GeneratedCode);
 }

@@ -1,4 +1,4 @@
-﻿namespace Keboo.SourceWeaver.Sdk;
+﻿namespace Keboo.SourceWeaver.Sdk.Output;
 
 public class GenerationOutput
 {
@@ -39,9 +39,9 @@ public class GenerationOutput
             sb.AppendLines(member);
         }
 
-        if (ClassMembers.Count > 0 && ClassName is not null)
+        if (ClassMembers.Count > 0 && TypeName is not null)
         {
-            sb.AppendLine($"partial class {ClassName}");
+            sb.AppendLine($"partial class {TypeName}");
             sb.AppendLine("{");
             sb.Indent();
             foreach (var member in ClassMembers)
@@ -60,5 +60,5 @@ public class GenerationOutput
     }
 
     public string? Namespace { get; set; }
-    public string? ClassName { get; set; }
+    public string? TypeName { get; set; }
 }
