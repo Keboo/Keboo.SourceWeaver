@@ -31,6 +31,6 @@
     <PackageVersion Include="Scriban" Version="7.2.4" />
     <PackageVersion Include="TUnit" Version="1.63.25" />
     <PackageVersion Include="TUnit.Assertions" Version="1.65.0" />
-    <PackageVersion Include="TUnit.Engine" Version="1.65.0" />
+    <PackageVersion Include="TUnit.Engine" Version="1.65.38" />
   </ItemGroup>
 </Project>
